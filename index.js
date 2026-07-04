@@ -105,7 +105,7 @@ app.use('/swagger-ui/index.html', swaggerUi.serve, swaggerUi.setup(swaggerDocume
 
 // Conectar Postgres y encender el Servidor
 const PORT = 8080;
-database.sync().then(() => {
+database.sync({ force: false }).then(() => {
     app.listen(PORT, () => {
         console.log(`\n🚀 Servidor Express corriendo con éxito en: http://localhost:${PORT}`);
         console.log(`📊 Pantalla de Swagger lista en: http://localhost:${PORT}/swagger-ui/index.html\n`);
