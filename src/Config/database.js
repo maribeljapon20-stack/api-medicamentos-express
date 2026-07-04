@@ -1,10 +1,15 @@
 const { Sequelize } = require('sequelize');
 
-// Conexión limpia a tus credenciales de pgAdmin
-const database = new Sequelize('medicamentos_db', 'postgres', 'Cinthya-23', {
-    host: 'localhost',
+// Usar la variable de entorno de Render (o local si no existe)
+const database = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
-    logging: false
+    logging: false,
+    dialectOptions: {
+        ssl: {
+            require: true,
+            rejectUnauthorized: false // Necesario para Render
+        }
+    }
 });
 
 module.exports = database;
