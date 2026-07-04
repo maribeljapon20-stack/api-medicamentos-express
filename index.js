@@ -18,8 +18,7 @@ const swaggerDocumento = {
         description: 'Estructura modular en 7 capas idéntica al diseño en Java.'
     },
     servers: [
-        { url: 'https://api-medicamentos-express.onrender.com', description: 'Render (Producción)' },
-        { url: 'http://localhost:8080', description: 'Local (Desarrollo)' }
+        { url: 'https://api-medicamentos-express.onrender.com', description: 'Render (Producción)' }
     ],
     components: {
         securitySchemes: {
