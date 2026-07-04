@@ -1,19 +1,15 @@
 const express = require('express');
-const cors = require('cors'); // <-- IMPORTAR ARRIBA
+const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const database = require('./src/Config/database');
 const rutasMedicamento = require('./src/Rutas/medicamentoRutas');
 
 const app = express();
 
-// ✅ HABILITAR CORS ANTES DE LAS RUTAS
 app.use(cors());
 app.use(express.json());
-
-// Enlazar las rutas bajo el prefijo correcto
 app.use('/api/medicamentos', rutasMedicamento);
 
-// Documentación en formato JSON directo (Adiós errores de YAML y tabulaciones)
 const swaggerDocumento = {
     openapi: '3.0.0',
     info: {
@@ -21,7 +17,7 @@ const swaggerDocumento = {
         version: '1.0.0',
         description: 'Estructura modular en 7 capas idéntica al diseño en Java.'
     },
-    servers: [{ url: 'http://localhost:8080' }],
+    servers: [{ url: 'https://api-medicamentos-express.onrender.com' }], // <-- CAMBIADO
     components: {
         securitySchemes: {
             basicAuth: {
@@ -100,10 +96,8 @@ const swaggerDocumento = {
     }
 };
 
-// Servir la interfaz gráfica de Swagger
 app.use('/swagger-ui/index.html', swaggerUi.serve, swaggerUi.setup(swaggerDocumento));
 
-// Conectar Postgres y encender el Servidor
 const PORT = 8080;
 database.sync({ force: false }).then(() => {
     app.listen(PORT, () => {
